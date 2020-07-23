@@ -25,11 +25,11 @@ def get_Inst_Info(data):
     Inst_Res.append(Inst_Name)
     Inst_Add = compute.instances().get(project=project, zone=zone,resourceId=ressourceId).execute()
     Inst_Add= json.load(f)
-	Inst_Add= json.dumps(Inst_Add['networkInterfaces'])
-	Inst_Add= json.loads(Inst_Add)
-	Inst_Add= json.dumps(Inst_Add[0])
-	Inst_Add= json.loads(Inst_Add)
-	Inst_Add=Inst_Add['networkIP'] 
+    Inst_Add= json.dumps(Inst_Add['networkInterfaces'])
+    Inst_Add= json.loads(Inst_Add)
+    Inst_Add= json.dumps(Inst_Add[0])
+    Inst_Add= json.loads(Inst_Add)
+    Inst_Add=Inst_Add['networkIP'] 
     Inst_Res.append(Inst_Add)
     return Inst_Res
 
