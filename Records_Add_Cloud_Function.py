@@ -56,11 +56,11 @@ def hello_pubsub(event, context):
     #print(event)
     if 'data' in event:
         name = base64.b64decode(event['data']).decode('utf-8')
-        Inst_Name=get_Inst_Info(name)[2]
-        Inst_IP=get_Inst_Info(name)[3]
     else:
         name = 'World'
     print('Hello {}!'.format(name))
+    Inst_Name=get_Inst_Info(name)[2]
+    Inst_IP=get_Inst_Info(name)[3]
     Instance_name = get_Inst_Info(data_to_parse)[2]
     Instance_Address = get_Inst_Info[3]
     Add_records(ProjectId,ZoneName,Inst_Name,Inst_IP)
