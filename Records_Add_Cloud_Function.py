@@ -22,7 +22,7 @@ def get_Inst_Info(data):
     Inst_Res.append(Zone_name)
     Inst_Name=Inst_info[5]
     Inst_Res.append(Inst_Name)
-    Inst_Add = compute.instances().get(ProjectId,ZoneName ,Inst_Name).execute()
+    Inst_Add = compute.instances().get(ProjectId,Zone_name,Inst_Name).execute()
     Inst_Add= json.loads(Inst_Add)
     Inst_Add= json.dumps(Inst_Add['networkInterfaces'])
     Inst_Add= json.loads(Inst_Add)
