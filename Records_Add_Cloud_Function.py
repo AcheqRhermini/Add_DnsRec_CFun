@@ -23,7 +23,6 @@ def get_Inst_Info(data):
     Inst_Res.append(Zone_name)
     Inst_Name=Inst_info[5]
     Inst_Res.append(Inst_Name)
-    
     Inst_Add = compute.instances().get(project=project, zone=zone,resourceId=ressourceId).execute()
     Inst_Add= json.load(f)
 	Inst_Add= json.dumps(Inst_Add['networkInterfaces'])
@@ -32,7 +31,6 @@ def get_Inst_Info(data):
 	Inst_Add= json.loads(Inst_Add)
 	Inst_Add=Inst_Add['networkIP'] 
     Inst_Res.append(Inst_Add)
-    
     return Inst_Res
 
    
@@ -60,10 +58,10 @@ def hello_pubsub(event, context):
     if 'data' in event:
         name = base64.b64decode(event['data']).decode('utf-8')
         Inst_Name=get_Inst_Info(name)[2]
-        Inst_IP=
+        Inst_IP=get_Inst_Info(name)[3]
     else:
         name = 'World'
     print('Hello {}!'.format(name))
     Instance_name = get_Inst_Info(data_to_parse)[2]
     Instance_Address = get_Inst_Info[3]
-    Add_records(ProjectId,ZoneName,Instance_name,Instance_Address)
+    Add_records(ProjectId,ZoneName,Inst_Name,Inst_IP)
