@@ -8,8 +8,7 @@ ProjectId = os.environ.get('ProjectID')
 ZoneName= os.environ.get('Private_Zone_Name')
 DNSName = os.environ.get('DNS_name')
 
-    
-    
+###### Methode pour récuperer, sous forme de liste, le nom de l'instance ; l'adresse ip de l'instance.      
 def get_Inst_Info(data):
     Inst_Res=[]
     data_json = json.loads(data)
@@ -24,7 +23,7 @@ def get_Inst_Info(data):
     Inst_Name=Inst_info[5]
     Inst_Res.append(Inst_Name)
     Inst_Add = compute.instances().get(project=project, zone=zone,resourceId=ressourceId).execute()
-    Inst_Add= json.load(f)
+    Inst_Add= json.loads(Inst_Add)
     Inst_Add= json.dumps(Inst_Add['networkInterfaces'])
     Inst_Add= json.loads(Inst_Add)
     Inst_Add= json.dumps(Inst_Add[0])
