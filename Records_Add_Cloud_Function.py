@@ -10,28 +10,26 @@ DNSName = os.environ.get('DNS_name')
 ZoneName = os.environ.get('Zone_Name')
 
 ###### Methode pour récuperer, sous forme de liste, le nom de l'instance ; l'adresse ip de l'instance.      
-def get_Inst_Info(data):
-    Inst_Res=[]
+def get_instance_info(data):
+    response=[]
     data_json = json.loads(data)
-    data_json=json.dumps(data_json['protoPayload'])
-    data_json=json.loads(data_json)
-    Inst_info = data_json['resourceName']
-    Inst_info = Inst_info.split("/")
-    Project_Name=Inst_info[1]
-    Inst_Res.append(Project_Name)
-    Zone_name=Inst_info[3]
-    Inst_Res.append(Zone_name)
-    Inst_Name=Inst_info[5]
-    Inst_Res.append(Inst_Name)
-    Inst_Add = compute.instances().get(ProjectId,Zone_name,Inst_Name).execute()
-    Inst_Add= json.loads(Inst_Add)
-    Inst_Add= json.dumps(Inst_Add['networkInterfaces'])
-    Inst_Add= json.loads(Inst_Add)
-    Inst_Add= json.dumps(Inst_Add[0])
-    Inst_Add= json.loads(Inst_Add)
-    Inst_Add=Inst_Add['networkIP'] 
-    Inst_Res.append(Inst_Add)
-    return Inst_Res
+    protoPayload = data_json.get("protoPayload")
+    resourceName = protoPayload.get("resourceName")
+    resourceName = resourceName.split("/")
+    project_name =resourceName[1]
+    response.append(project_name)
+    zone_name=resourceName[3]
+    response.append(zone_name)
+    instance_name= resourceName[5]
+    response.append(instance_name)    
+    return response
+
+def get_instance_ip():
+    with open('out.json') as f:
+        network_ip = json.load(f)
+        network_ip= network_ip.get("networkInterfaces")[0]
+        network_ip = network_ip.get("networkIP")
+    return network_ip
 
    
 def list_resource_records(project_id, dns_zone_name):

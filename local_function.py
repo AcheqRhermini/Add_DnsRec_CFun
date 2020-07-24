@@ -28,10 +28,8 @@ def get_instance_info(data):
     response=[]
     data_json = json.loads(data)
     protoPayload = data_json.get("protoPayload")
-    #data_json=json.dumps(data_json['protoPayload'])
-    #data_json=json.loads(data_json)
     resourceName = protoPayload.get("resourceName")
-    resourceName = resourceName.split("/")
+    resourceName = resourceName.split("/") # < type str > 
     project_name =resourceName[1]
     response.append(project_name)
     zone_name=resourceName[3]
