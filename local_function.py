@@ -52,5 +52,4 @@ def hello_pubsub(event, context):
     if 'data' in event:
         name = base64.b64decode(event['data']).decode('utf-8')
     else:
-        name = 'World'
-    #Inst_Name=get_Inst_Info(name)[2]
+        name = 'No data in event'
