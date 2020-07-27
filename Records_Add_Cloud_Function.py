@@ -39,14 +39,14 @@ def list_resource_records(project_id, dns_zone_name):
     return [(record.name, record.record_type, record.ttl, record.rrdatas) for record in records]
 
 
-def Add_records(project_id,dns_zone_name,Ist_N,Ist_IP):
+def Add_records(project_id,dns_zone_name,instance_name,instance_ip):
     client = dns.Client(project=project_id)
     zone = client.zone(dns_zone_name)
-    TWO_HOURS = 2 * 60 * 60  # seconds
-    record_set = zone.resource_record_set(Ist_N +'.rhermini.com.','A', TWO_HOURS,Ist_IP)
+    two_hours = 2 * 60 * 60  # seconds
+    record_set = zone.resource_record_set(instance_name +instance_name,'A', two_hours, instance_ip)
     changes = zone.changes()
     changes.add_record_set(record_set)
-    changes.create() 
+    changes.create()
 
 
 def hello_pubsub(event, context):
