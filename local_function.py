@@ -1,7 +1,7 @@
 import base64
 import os
 import json
-import googleapiclient.discovery
+#import googleapiclient.discovery
 
 PROJECT_ID = os.environ.get('ProjectID')
 ZONE_NAME  = os.environ.get('Private_Zone_Name')
@@ -39,11 +39,18 @@ def get_instance_info(data):
     return response
     
 def get_instance_ip():
-    with open('out.json') as f:
-        network_ip = json.load(f)
-        network_ip= network_ip.get("networkInterfaces")[0]
-        network_ip = network_ip.get("networkIP")
+    network_ip= { 
+        "networkInterfaces": {     
+            "network": "https://www.googleapis.com/compute/v1/projects/winter-form-254618/global/networks/default",
+            "subnetwork": "https://www.googleapis.com/compute/v1/projects/winter-form-254618/regions/us-central1/subnetworks/default",
+            "networkIP": "10.128.0.8",
+            "name": "nic0"
+      }
+      }
+    network_ip= network_ip.get("networkInterfaces")
+    network_ip=network_ip.get("networkIP")
     return network_ip
+
 
 def hello_pubsub(event, context):
     print("""This Function was triggered by messageId {} published at {}
